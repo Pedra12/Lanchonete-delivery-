@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lanchonete Delivery - Cardápio Completo</title>
+    <title>Lanchonete & Açaí Delivery</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Remove a barra de rolagem visual dos botões de categorias, mantendo o funcionamento */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -39,29 +38,106 @@
     <div class="w-full max-w-6xl mx-auto px-4 mt-6">
         <div class="w-full h-44 md:h-64 rounded-3xl overflow-hidden relative bg-cover bg-center shadow-2xl" style="background-image: linear-gradient(to top, rgba(9, 9, 11, 0.95), rgba(9, 9, 11, 0.4)), url('https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop');">
             <div class="absolute bottom-6 left-6 md:left-10 max-w-lg">
-                <span class="bg-amber-500/20 text-amber-400 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider border border-amber-500/30">Os Melhores da Região</span>
-                <h2 class="text-2xl md:text-4xl font-black mt-2 tracking-tight">Mate sua fome com quem entende de sabor.</h2>
+                <span class="bg-amber-500/20 text-amber-400 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider border border-amber-500/30">Cardápio Completo</span>
+                <h2 class="text-2xl md:text-4xl font-black mt-2 tracking-tight">O melhor lanche e o açaí mais completo da região.</h2>
             </div>
         </div>
     </div>
 
-    <div class="w-full max-w-6xl mx-auto px-4 mt-6 sticky top-[73px] bg-neutral-950/90 backdrop-blur-md py-3 z-30 border-b border-neutral-900/50 overflow-x-auto no-scrollbar flex gap-2">
-        <a href="#cat-gourmet" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500 px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 text-zinc-300 hover:text-amber-400">
-            ✨ Gourmets
-        </a>
-        <a href="#cat-tradicional" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500 px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 text-zinc-300 hover:text-amber-400">
-            🍔 Tradicionais
-        </a>
-        <a href="#cat-bebidas" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500 px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 text-zinc-300 hover:text-amber-400">
-            🥤 Bebidas
-        </a>
-        <a href="#cat-sobremesas" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500 px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 text-zinc-300 hover:text-amber-400">
-            🍨 Sobremesas
-        </a>
+    <div class="w-full max-w-6xl mx-auto px-4 mt-6 sticky top-[73px] bg-neutral-950/90 backdrop-blur-md py-3 z-30 border-b border-neutral-900 flex gap-2 overflow-x-auto no-scrollbar">
+        <a href="#sec-gourmet" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500 px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 text-zinc-300 hover:text-amber-400">✨ Lanches Gourmets</a>
+        <a href="#sec-tradicional" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500 px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 text-zinc-300 hover:text-amber-400">🍔 Lanches Tradicionais</a>
+        <a href="#sec-bebidas" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500 px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 text-zinc-300 hover:text-amber-400">🥤 Bebidas</a>
+        <a href="#sec-sobremesas" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500 px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 text-zinc-300 hover:text-amber-400">🍨 Sobremesas e Açaí</a>
     </div>
 
-    <main id="menu-container" class="max-w-6xl mx-auto px-4 mt-8">
-        </main>
+    <main class="max-w-6xl mx-auto px-4 mt-8 space-y-12">
+        
+        <section id="sec-gourmet" class="scroll-mt-36">
+            <h3 class="text-xl font-black text-neutral-100 border-b-2 border-amber-500 w-fit pb-2 mb-6 tracking-wide uppercase">✨ Lanches Gourmets</h3>
+            <div id="grid-gourmet" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="sec-tradicional" class="scroll-mt-36">
+            <h3 class="text-xl font-black text-neutral-100 border-b-2 border-amber-500 w-fit pb-2 mb-6 tracking-wide uppercase">🍔 Lanches Tradicionais</h3>
+            <div id="grid-tradicional" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="sec-bebidas" class="scroll-mt-36">
+            <h3 class="text-xl font-black text-neutral-100 border-b-2 border-amber-500 w-fit pb-2 mb-6 tracking-wide uppercase">🥤 Bebidas</h3>
+            <div id="grid-bebidas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="sec-sobremesas" class="scroll-mt-36">
+            <h3 class="text-xl font-black text-neutral-100 border-b-2 border-amber-500 w-fit pb-2 mb-6 tracking-wide uppercase">🍨 Sobremesas e Açaí</h3>
+            <div id="grid-sobremesas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+    </main>
+
+    <div id="acai-modal" class="fixed inset-0 bg-black/80 z-50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-neutral-900 border border-neutral-800 rounded-3xl w-full max-w-lg max-h-[85vh] flex flex-col overflow-hidden shadow-2xl animate-fade-in">
+            <div class="p-4 border-b border-neutral-800 bg-neutral-950 flex justify-between items-center">
+                <div>
+                    <h3 id="acai-modal-title" class="text-lg font-black text-amber-500">Montar Seu Açaí</h3>
+                    <p class="text-xs text-neutral-400">Monte do seu jeito sem erros</p>
+                </div>
+                <button onclick="closeAcaiModal()" class="text-neutral-400 hover:text-neutral-100 p-2 rounded-lg bg-neutral-800 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-5 space-y-6">
+                <div>
+                    <h4 class="text-sm font-black text-amber-400 uppercase tracking-wider mb-2">🍓 1. Escolha as Frutas (Grátis - Até 2)</h4>
+                    <div class="space-y-2 bg-neutral-950 p-3 rounded-xl border border-neutral-800">
+                        <label class="flex items-center gap-3 text-sm cursor-pointer py-1"><input type="checkbox" name="acai-frutas" value="Morango" class="w-4 h-4 accent-amber-500"> Morango</label>
+                        <label class="flex items-center gap-3 text-sm cursor-pointer py-1"><input type="checkbox" name="acai-frutas" value="Banana" class="w-4 h-4 accent-amber-500"> Banana</label>
+                        <label class="flex items-center gap-3 text-sm cursor-pointer py-1"><input type="checkbox" name="acai-frutas" value="Kiwi" class="w-4 h-4 accent-amber-500"> Kiwi</label>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-black text-amber-400 uppercase tracking-wider mb-2">🥛 2. Complementos Tradicionais (Grátis - Até 3)</h4>
+                    <div class="space-y-2 bg-neutral-950 p-3 rounded-xl border border-neutral-800">
+                        <label class="flex items-center gap-3 text-sm cursor-pointer py-1"><input type="checkbox" name="acai-comps" value="Leite em Pó" class="w-4 h-4 accent-amber-500"> Leite em Pó</label>
+                        <label class="flex items-center gap-3 text-sm cursor-pointer py-1"><input type="checkbox" name="acai-comps" value="Granola" class="w-4 h-4 accent-amber-500"> Granola</label>
+                        <label class="flex items-center gap-3 text-sm cursor-pointer py-1"><input type="checkbox" name="acai-comps" value="Paçoca" class="w-4 h-4 accent-amber-500"> Paçoca</label>
+                        <label class="flex items-center gap-3 text-sm cursor-pointer py-1"><input type="checkbox" name="acai-comps" value="Ovomaltine" class="w-4 h-4 accent-amber-500"> Ovomaltine</label>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-black text-amber-400 uppercase tracking-wider mb-2">🍯 3. Escolha a Cobertura (Grátis - Escolha 1)</h4>
+                    <div class="space-y-2 bg-neutral-950 p-3 rounded-xl border border-neutral-800">
+                        <label class="flex items-center gap-3 text-sm cursor-pointer py-1"><input type="radio" name="acai-cobertura" value="Leite Condensado" class="w-4 h-4 accent-amber-500" checked> Leite Condensado</label>
+                        <label class="flex items-center gap-3 text-sm cursor-pointer py-1"><input type="radio" name="acai-cobertura" value="Calda de Chocolate" class="w-4 h-4 accent-amber-500"> Calda de Chocolate</label>
+                        <label class="flex items-center gap-3 text-sm cursor-pointer py-1"><input type="radio" name="acai-cobertura" value="Calda de Morango" class="w-4 h-4 accent-amber-500"> Calda de Morango</label>
+                        <label class="flex items-center gap-3 text-sm cursor-pointer py-1"><input type="radio" name="acai-cobertura" value="Sem Cobertura" class="w-4 h-4 accent-amber-500"> Sem Cobertura</label>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-black text-amber-400 uppercase tracking-wider mb-2">🍫 4. Adicionais Premium (Opcional - Pago)</h4>
+                    <div class="space-y-2 bg-neutral-950 p-3 rounded-xl border border-neutral-800">
+                        <label class="flex justify-between items-center text-sm cursor-pointer py-1">
+                            <span class="flex items-center gap-3"><input type="checkbox" name="acai-premium" value="Nutella" data-price="4.00" class="w-4 h-4 accent-amber-500"> Nutella original</span>
+                            <span class="text-emerald-400 font-bold">+ R$ 4,00</span>
+                        </label>
+                        <label class="flex justify-between items-center text-sm cursor-pointer py-1">
+                            <span class="flex items-center gap-3"><input type="checkbox" name="acai-premium" value="KitKat" data-price="3.00" class="w-4 h-4 accent-amber-500"> Pedaços de KitKat</span>
+                            <span class="text-emerald-400 font-bold">+ R$ 3,00</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 border-t border-neutral-800 bg-neutral-950 flex gap-3">
+                <button onclick="closeAcaiModal()" class="flex-1 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 py-3 rounded-xl font-bold cursor-pointer text-sm">Cancelar</button>
+                <button onclick="confirmAcaiCustomization()" class="flex-1 bg-amber-500 hover:bg-amber-400 text-neutral-950 py-3 rounded-xl font-black cursor-pointer text-sm shadow-lg">Confirmar e Adicionar</button>
+            </div>
+        </div>
+    </div>
 
     <div id="cart-sidebar" class="fixed inset-0 bg-black/70 z-50 backdrop-blur-sm hidden flex justify-end">
         <div class="w-full max-w-md bg-neutral-900 h-full flex flex-col shadow-2xl border-l border-neutral-800">
@@ -80,24 +156,20 @@
                 <p class="text-center text-neutral-500 py-10">Seu carrinho está vazio.</p>
             </div>
 
-            <div class="p-4 border-t border-neutral-800 bg-neutral-950 space-y-4">
+            <div class="p-4 border-t border-neutral-800 bg-neutral-950 space-y-4 shadow-xl">
                 <div class="flex justify-between items-center text-lg font-black border-b border-neutral-800 pb-3">
                     <span>Total do Pedido:</span>
                     <span id="cart-total" class="text-amber-500">R$ 0,00</span>
                 </div>
 
-                <div class="space-y-3 max-h-64 overflow-y-auto pr-1">
+                <div class="space-y-3 max-h-56 overflow-y-auto pr-1">
                     <h4 class="text-xs font-black text-neutral-400 uppercase tracking-wider">📍 Dados para Entrega</h4>
-                    
                     <input type="text" id="cust-name" placeholder="Seu Nome Completo" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
-                    
                     <input type="tel" id="cust-phone" placeholder="Seu Telefone / WhatsApp" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
-                    
                     <div class="grid grid-cols-3 gap-2">
                         <input type="text" id="cust-street" placeholder="Rua / Av." class="col-span-2 bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
                         <input type="text" id="cust-number" placeholder="Nº" class="bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
                     </div>
-
                     <div class="grid grid-cols-2 gap-2">
                         <input type="text" id="cust-bairro" placeholder="Bairro" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
                         <input type="text" id="cust-ref" placeholder="Ponto de Ref." class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
@@ -117,9 +189,8 @@
                     </div>
                 </div>
 
-                <button onclick="sendOrder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3.5 rounded-xl font-black text-base flex items-center justify-center gap-2 transition duration-200 shadow-xl cursor-pointer">
-                    <i class="fa-brands fa-whatsapp text-xl"></i>
-                    Finalizar e Enviar via WhatsApp
+                <button onclick="sendOrder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3.5 rounded-xl font-black text-base flex items-center justify-center gap-2 cursor-pointer transition duration-200 shadow-xl">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Finalizar via WhatsApp
                 </button>
             </div>
         </div>
@@ -136,198 +207,19 @@
     </div>
 
     <script>
-        // CONFIGURAÇÃO: Insira o número do WhatsApp da loja aqui (Apenas números com DDD)
         const WHATSAPP_NUMBER = "5527999999999"; 
 
-        // MAPEAMENTO DE CATEGORIAS DISPONÍVEIS
-        const CATEGORIES = {
-            gourmet: "✨ Lanches Gourmets",
-            tradicional: "🍔 Lanches Tradicionais",
-            bebidas: "🥤 Bebidas",
-            sobremesas: "🍨 Sobremesas"
-        };
-
-        // CARDÁPIO DE PRODUTOS COMPLETO
         const PRODUCTS = [
             // LANCHES GOURMETS
-            {
-                id: 1,
-                category: "gourmet",
-                name: "Smash Burger Duplo",
-                price: 22.00,
-                description: "Pão brioche selado na manteiga, dois blends de carne artesanal de 90g grelhados, queijo cheddar derretido, alface crespa, tomate e molho especial.",
-                image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=500&auto=format&fit=crop"
-            },
-            {
-                id: 2,
-                category: "gourmet",
-                name: "Monster Bacon Burger",
-                price: 32.00,
-                description: "Pão australiano macio, blend artesanal de 180g super suculento, muitas camadas de bacon crocante, queijo prato e cebola caramelizada.",
-                image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=500&auto=format&fit=crop"
-            },
-            {
-                id: 3,
-                category: "gourmet",
-                name: "Chicken Cheddar Crispy",
-                price: 26.00,
-                description: "Pão brioche premium, filé de frango empanado crocante por fora e suculento por dentro, muito cheddar cremoso quente e maionese verde artesanal.",
-                image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?q=80&w=500&auto=format&fit=crop"
-            },
-            // LANCHES TRADICIONAIS
-            {
-                id: 4,
-                category: "tradicional",
-                name: "X-Salada Tradicional",
-                price: 16.00,
-                description: "Pão de hambúrguer clássico com gergelim, blend de carne tradicional de 120g, queijo prato derretido, alface crespa, tomate fresco e maionese da casa.",
-                image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?q=80&w=500&auto=format&fit=crop"
-            },
-            {
-                id: 5,
-                category: "tradicional",
-                name: "X-Bacon Egg Clássico",
-                price: 20.00,
-                description: "Pão tradicional de lanchonete, blend de carne 120g, ovo frito na chapa, fatias de bacon crocante, queijo prato e maionese especial.",
-                image: "https://images.unsplash.com/photo-1549611016-3a70d82b5040?q=80&w=500&auto=format&fit=crop"
-            },
-            // BEBIDAS
-            {
-                id: 6,
-                category: "bebidas",
-                name: "Água Mineral (Sem Gás)",
-                price: 4.00,
-                description: "Garrafa de 500ml de água mineral pura, servida trincando de gelada.",
-                image: "https://images.unsplash.com/photo-1608885898957-a599fb1698d6?q=80&w=500&auto=format&fit=crop"
-            },
-            {
-                id: 7,
-                category: "bebidas",
-                name: "Coca-Cola Lata",
-                price: 6.00,
-                description: "Lata de 350ml refrescante, perfeita para acompanhar o seu lanche.",
-                image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=500&auto=format&fit=crop"
-            },
-            {
-                id: 8,
-                category: "bebidas",
-                name: "Suco de Laranja Natural",
-                price: 8.50,
-                description: "Copo de 400ml de suco de laranja natural, espremido na hora, sem conservantes.",
-                image: "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?q=80&w=500&auto=format&fit=crop"
-            },
-            // SOBREMESAS
-            {
-                id: 9,
-                category: "sobremesas",
-                name: "Pudim de Leite Moça",
-                price: 8.00,
-                description: "Fatia generosa de pudim caseiro super cremoso, coberto com calda de caramelo artesanal perfeita.",
-                image: "https://images.unsplash.com/photo-1528975604071-b4dc52a2d18c?q=80&w=500&auto=format&fit=crop"
-            },
-            {
-                id: 10,
-                category: "sobremesas",
-                name: "Brownie com Sorvete",
-                price: 14.50,
-                description: "Brownie de chocolate meio amargo quentinho com pedaços de nozes, acompanhado de uma bola de sorvete de creme.",
-                image: "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?q=80&w=500&auto=format&fit=crop"
-            }
-        ];
-
-        let cart = [];
-
-        // Renderiza as seções e os produtos de forma totalmente organizada
-        function init() {
-            const menuContainer = document.getElementById('menu-container');
-            if (!menuContainer) return;
-
-            let htmlContent = '';
-
-            // Varre cada categoria definida e cria blocos separados na interface
-            for (const [key, title] of Object.entries(CATEGORIES)) {
-                const filteredProducts = PRODUCTS.filter(p => p.category === key);
-
-                if (filteredProducts.length > 0) {
-                    htmlContent += `
-                        <div id="cat-${key}" class="mb-14 scroll-mt-36">
-                            <h3 class="text-xl font-black text-neutral-100 border-b-2 border-amber-500 w-fit pb-2 mb-6 tracking-wide uppercase">
-                                ${title}
-                            </h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                ${filteredProducts.map(prod => `
-                                    <div class="bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden shadow-lg hover:border-neutral-700 transition duration-300 flex flex-col justify-between group">
-                                        <div class="relative overflow-hidden h-48 bg-neutral-800">
-                                            <img src="${prod.image}" alt="${prod.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                                            <div class="absolute top-3 right-3 bg-neutral-950/80 backdrop-blur-md px-3 py-1 rounded-full text-amber-500 font-black text-sm border border-neutral-800">
-                                                R$ ${prod.price.toFixed(2).replace('.', ',')}
-                                            </div>
-                                        </div>
-                                        <div class="p-5 flex-1 flex flex-col justify-between gap-4">
-                                            <div>
-                                                <h4 class="text-lg font-black text-neutral-100 mb-2 tracking-tight group-hover:text-amber-500 transition">${prod.name}</h4>
-                                                <p class="text-sm text-neutral-400 leading-relaxed font-light">${prod.description}</p>
-                                            </div>
-                                            <button onclick="addToCart(${prod.id})" class="w-full bg-neutral-800 hover:bg-amber-500 hover:text-neutral-950 text-neutral-100 font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-200 cursor-pointer">
-                                                <i class="fa-solid fa-plus text-xs"></i> Adicionar ao Carrinho
-                                            </button>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-                }
-            }
-
-            menuContainer.innerHTML = htmlContent;
-            updateCartUI();
-        }
-
-        function toggleCart(open) {
-            const sidebar = document.getElementById('cart-sidebar');
-            if (open) sidebar.classList.remove('hidden');
-            else sidebar.classList.add('hidden');
-        }
-
-        function addToCart(id) {
-            const existingItem = cart.find(item => item.id === id);
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                const product = PRODUCTS.find(p => p.id === id);
-                cart.push({ ...product, quantity: 1 });
-            }
-            updateCartUI();
-        }
-
-        function changeQuantity(id, delta) {
-            const item = cart.find(item => item.id === id);
-            if (item) {
-                item.quantity += delta;
-                if (item.quantity <= 0) {
-                    cart = cart.filter(i => i.id !== id);
-                }
-            }
-            updateCartUI();
-        }
-
-        function handlePaymentChange() {
-            const method = document.getElementById('payment-method').value;
-            const changeContainer = document.getElementById('change-container');
-            if (method === 'Dinheiro') changeContainer.classList.remove('hidden');
-            else changeContainer.classList.add('hidden');
-        }
-
-        function updateCartUI() {
-            const container = document.getElementById('cart-items-container');
-            const totalElement = document.getElementById('cart-total');
-            const mobileTotalElement = document.getElementById('mobile-total');
-            const badge = document.getElementById('cart-count-badge');
-            const mobileFooter = document.getElementById('mobile-footer');
-
-            if (cart.length === 0) {
-                container.innerHTML = `<p class="text-center text-neutral-500 py-10">Seu carrinho está vazio.</p>`;
-                totalElement.innerText = "R$ 0,00";
-                mobileTotalElement.innerText = "R$ 0,00";
-                badge.
+            { id: 1, category: "gourmet", name: "Smash Burger Duplo", price: 22.00, description: "Pão brioche selado na manteiga, dois blends de carne de 90g, muito cheddar derretido, alface, tomate e molho da casa.", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=500&auto=format&fit=crop" },
+            { id: 2, category: "gourmet", name: "Monster Bacon Burger", price: 32.00, description: "Pão australiano macio, super blend artesanal de 180g, muitas fatias de bacon crocante, queijo prato e cebola caramelizada.", image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=500&auto=format&fit=crop" },
+            { id: 3, category: "gourmet", name: "Chicken Cheddar Crispy", price: 26.00, description: "Pão brioche, filé de frango empanado super crocante, muito cheddar cremoso quente e maionese verde temperada.", image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?q=80&w=500&auto=format&fit=crop" },
+            
+            // SEQUÊNCIA CLÁSSICA DE LANCHES TRADICIONAIS (DO HAMBÚRGUER AO X-TUDO)
+            { id: 4, category: "tradicional", name: "Hambúrguer Simples", price: 10.00, description: "Pão de lanchonete macio, blend tradicional de 120g grelhado na chapa e maionese artesanal da casa.", image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=500&auto=format&fit=crop" },
+            { id: 5, category: "tradicional", name: "X-Burguer", price: 12.00, description: "Pão de lanchonete, blend tradicional de 120g, duas fatias de queijo prato derretido na chapa e maionese.", image: "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=500&auto=format&fit=crop" },
+            { id: 6, category: "tradicional", name: "X-Salada", price: 14.00, description: "Pão de lanchonete, blend tradicional de 120g, queijo prato derretido, alface crespa fresca, tomate e maionese.", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?q=80&w=500&auto=format&fit=crop" },
+            { id: 22, category: "tradicional", name: "X-Bacon", price: 17.00, description: "Pão de lanchonete, blend tradicional de 120g, queijo prato e fartas fatias de bacon crocante bem douradas.", image: "https://images.unsplash.com/photo-1549611016-3a70d82b5040?q=80&w=500&auto=format&fit=crop" },
+            { id: 23, category: "tradicional", name: "X-Egg", price: 15.00, description: "Pão de lanchonete, blend tradicional de 120g, queijo prato derretido e um ovo frito perfeito na chapa.", image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=500&auto=format&fit=crop" },
+            { id: 24, category: "tradicional", name: "X-Egg Bacon", price: 19.00, description: "Pão de lanchonete, blend tradicional de 120g, queijo prato, ovo frito na chapa, fatias de bacon e maionese.", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=500&auto=format&fit=crop" },
+            { id: 25, category: "tradicional", name: "X-Frango", price: 18.00, description: "Pão de lanch
