@@ -261,4 +261,333 @@
                 </div>
                 <div class="bg-white rounded-2xl p-3 flex gap-3 shadow-sm border border-gray-100">
                     <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?q=80&w=200&auto=format&fit=crop" class="w-20 h-20 rounded-xl object-cover" alt="Heineken Long Neck">
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-sm">Heineken Long Neck 330ml</h3>
+                            <p class="text-xs text-gray-500">Bebida alcoólica. Trincando de gelada.</p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-amber-600 font-bold text-sm">R$ 9,00</span>
+                            <button onclick="addToCart('b4', 'Heineken Long Neck', 9.00)" class="bg-amber-500 hover:bg-amber-600 text-white p-1.5 rounded-lg text-xs transition">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-sobremesas">
+            <h2 class="text-xl font-bold border-l-4 border-amber-500 pl-2 mb-4">🍧 Sobremesas e Açaí</h2>
+            <div class="grid grid-cols-1 gap-4">
+                <div class="bg-white rounded-2xl p-3 flex gap-3 shadow-sm border border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1528975604071-b4dc52a2d18c?q=80&w=200&auto=format&fit=crop" class="w-24 h-24 rounded-xl object-cover" alt="Pudim de Leite">
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-base">Pudim Caseiro de Leite</h3>
+                            <p class="text-xs text-gray-500 line-clamp-2 mt-1">Pudim de leite condensado lisinho com calda de caramelo artesanal. Receita de vó!</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-amber-600 font-bold text-base">R$ 8,00</span>
+                            <button onclick="addToCart('s1', 'Pudim Caseiro de Leite', 8.00)" class="bg-amber-500 hover:bg-amber-600 text-white p-2 rounded-lg text-sm transition">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-3 flex gap-3 shadow-sm border border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?q=80&w=200&auto=format&fit=crop" class="w-24 h-24 rounded-xl object-cover" alt="Açaí 300ml">
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-base">Açaí no Copo 300ml</h3>
+                            <p class="text-xs text-gray-500 line-clamp-2 mt-1">Açaí cremoso e puro. Clique no "+" para escolher seus complementos totalmente grátis!</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-amber-600 font-bold text-base">R$ 12,00</span>
+                            <button onclick="openAcaiModal('a1', 'Açaí no Copo 300ml', 12.00)" class="bg-amber-500 hover:bg-amber-600 text-white p-2 rounded-lg text-sm transition">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-3 flex gap-3 shadow-sm border border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?q=80&w=200&auto=format&fit=crop" class="w-24 h-24 rounded-xl object-cover" alt="Açaí 500ml">
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-base">Açaí no Copo 500ml</h3>
+                            <p class="text-xs text-gray-500 line-clamp-2 mt-1">Nosso tamanho mais vendido. Monte com seus adicionais prediletos!</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-amber-600 font-bold text-base">R$ 16,00</span>
+                            <button onclick="openAcaiModal('a2', 'Açaí no Copo 500ml', 16.00)" class="bg-amber-500 hover:bg-amber-600 text-white p-2 rounded-lg text-sm transition">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="cart-counter-bar" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] z-50 hidden">
+        <div class="max-w-md mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="relative bg-amber-500 text-white p-2.5 rounded-xl">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-400">Total do pedido</p>
+                    <p id="cart-total-bar" class="text-base font-bold text-gray-900">R$ 0,00</p>
+                </div>
+            </div>
+            <button onclick="openCartModal()" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-sm transition">
+                Ver Carrinho
+            </button>
+        </div>
+    </div>
+
+    <div id="acai-modal" class="fixed inset-0 bg-black/60 z-50 flex items-end justify-center hidden p-4">
+        <div class="bg-white w-full max-w-md rounded-t-2xl p-5 max-h-[85vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-gray-100 pb-3 mb-4">
+                <h3 id="acai-title" class="font-bold text-lg text-gray-900">Personalize seu Açaí</h3>
+                <button onclick="closeAcaiModal()" class="text-gray-400 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p class="text-xs text-amber-600 font-medium mb-4"><i class="fa-solid fa-circle-info mr-1"></i> Escolha até 4 complementos grátis:</p>
+            
+            <div class="space-y-3" id="acai-options-container">
+                <label class="flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-100 cursor-pointer">
+                    <span class="text-sm font-medium text-gray-700">Leite em Pó</span>
+                    <input type="checkbox" value="Leite em Pó" class="w-5 h-5 accent-amber-500 acai-cb">
+                </label>
+                <label class="flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-100 cursor-pointer">
+                    <span class="text-sm font-medium text-gray-700">Leite Condensado</span>
+                    <input type="checkbox" value="Leite Condensado" class="w-5 h-5 accent-amber-500 acai-cb">
+                </label>
+                <label class="flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-100 cursor-pointer">
+                    <span class="text-sm font-medium text-gray-700">Morango Fresco</span>
+                    <input type="checkbox" value="Morango" class="w-5 h-5 accent-amber-500 acai-cb">
+                </label>
+                <label class="flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-100 cursor-pointer">
+                    <span class="text-sm font-medium text-gray-700">Banana em Rodelas</span>
+                    <input type="checkbox" value="Banana" class="w-5 h-5 accent-amber-500 acai-cb">
+                </label>
+                <label class="flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-100 cursor-pointer">
+                    <span class="text-sm font-medium text-gray-700">Granola Crocante</span>
+                    <input type="checkbox" value="Granola" class="w-5 h-5 accent-amber-500 acai-cb">
+                </label>
+            </div>
+            
+            <button onclick="confirmAcai()" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl mt-6 shadow-sm transition">
+                Confirmar e Adicionar
+            </button>
+        </div>
+    </div>
+
+    <div id="cart-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white w-full max-w-md rounded-2xl p-5 max-h-[90vh] flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-center border-b border-gray-100 pb-3 mb-4">
+                    <h3 class="font-bold text-lg text-gray-900"><i class="fa-solid fa-basket-shopping text-amber-500 mr-2"></i>Seu Carrinho</h3>
+                    <button onclick="closeCartModal()" class="text-gray-400 text-xl"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <div id="cart-items" class="space-y-3 overflow-y-auto max-h-[30vh] pr-1">
+                    </div>
+
+                <div class="border-t border-gray-100 pt-3 mt-4 space-y-2">
+                    <div class="flex justify-between text-sm text-gray-500">
+                        <span>Subtotal:</span>
+                        <span id="modal-subtotal">R$ 0,00</span>
+                    </div>
+                    <div class="flex justify-between text-base font-bold text-gray-900">
+                        <span>Total Geral:</span>
+                        <span id="modal-total">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <div class="mt-4 space-y-2">
+                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Endereço de Entrega</h4>
+                    <input type="text" id="delivery-address" placeholder="Rua, Número e Bairro" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-amber-500">
+                    <input type="text" id="delivery-ref" placeholder="Ponto de referência (Opcional)" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-amber-500">
+                    
+                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider pt-2">Forma de Pagamento</h4>
+                    <select id="payment-method" onchange="toggleTroco()" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-amber-500">
+                        <option value="Pix">Pix (Envio da chave automático)</option>
+                        <option value="Cartão">Cartão Débito / Crédito (Levar maquininha)</option>
+                        <option value="Dinheiro">Dinheiro</option>
+                    </select>
+                    <input type="text" id="payment-troco" placeholder="Troco para quanto?" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-amber-500 hidden">
+                </div>
+            </div>
+
+            <button onclick="checkoutWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl mt-6 shadow-md flex items-center justify-center gap-2 transition">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Enviar Pedido para o WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURAÇÕES GERAIS
+        const WHATSAPP_NUMBER = "5527998987359";
+        let cart = [];
+        let currentAcai = null;
+
+        // ADICIONAR ITEM PADRÃO AO CARRINHO
+        function addToCart(id, name, price) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ id, name, price, quantity: 1 });
+            }
+            updateCartUI();
+        }
+
+        // CONTROLE DO MODAL DE AÇAÍ
+        function openAcaiModal(id, name, price) {
+            currentAcai = { id, name, price };
+            document.getElementById('acai-title').innerText = `Personalizar ${name}`;
+            const cbs = document.querySelectorAll('.acai-cb');
+            cbs.forEach(cb => cb.checked = false);
+            document.getElementById('acai-modal').classList.remove('hidden');
+        }
+
+        function closeAcaiModal() {
+            document.getElementById('acai-modal').classList.add('hidden');
+            currentAcai = null;
+        }
+
+        function confirmAcai() {
+            if (!currentAcai) return;
+            
+            const checkedBoxes = document.querySelectorAll('.acai-cb:checked');
+            let complements = [];
+            
+            checkedBoxes.forEach(cb => {
+                complements.push(cb.value);
+            });
+
+            if (complements.length > 4) {
+                alert("Por favor, selecione no máximo 4 complementos!");
+                return;
+            }
+
+            let finalName = currentAcai.name;
+            if (complements.length > 0) {
+                finalName += ` [Adicionais: ${complements.join(', ')}]`;
+            } else {
+                finalName += ` [Sem adicionais]`;
+            }
+
+            // Cria um ID único para esse açaí customizado não misturar com outros diferentes
+            const uniqueId = currentAcai.id + '-' + Date.now();
+            cart.push({ id: uniqueId, name: finalName, price: currentAcai.price, quantity: 1 });
+            
+            closeAcaiModal();
+            updateCartUI();
+        }
+
+        // ATUALIZAR INTERFACE DO CARRINHO
+        function updateCartUI() {
+            const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+            const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+
+            // Barra inferior flutuante
+            if (totalItems > 0) {
+                document.getElementById('cart-counter-bar').classList.remove('hidden');
+                document.getElementById('cart-count').innerText = totalItems;
+                document.getElementById('cart-total-bar').innerText = totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            } else {
+                document.getElementById('cart-counter-bar').classList.add('hidden');
+            }
+
+            // Itens dentro do modal principal
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+
+            cart.forEach(item => {
+                const itemRow = document.createElement('div');
+                itemRow.className = 'flex justify-between items-center bg-gray-50 p-2.5 rounded-xl border border-gray-100';
+                itemRow.innerHTML = `
+                    <div class="flex-1 min-w-0 pr-2">
+                        <p class="text-sm font-semibold text-gray-900 truncate">${item.name}</p>
+                        <p class="text-xs text-amber-600 font-bold">${(item.price * item.quantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="changeQuantity('${item.id}', -1)" class="bg-gray-200 text-gray-700 w-6 h-6 rounded-md text-xs font-bold">-</button>
+                        <span class="text-sm font-semibold w-4 text-center">${item.quantity}</span>
+                        <button onclick="changeQuantity('${item.id}', 1)" class="bg-amber-500 text-white w-6 h-6 rounded-md text-xs font-bold">+</button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemRow);
+            });
+
+            document.getElementById('modal-subtotal').innerText = totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            document.getElementById('modal-total').innerText = totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        // MUDAR QUANTIDADE DO ITEM NO CARRINHO
+        function changeQuantity(id, change) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+            }
+            updateCartUI();
+        }
+
+        // GERENCIAMENTO DOS MODAIS
+        function openCartModal() { document.getElementById('cart-modal').classList.remove('hidden'); }
+        function closeCartModal() { document.getElementById('cart-modal').classList.add('hidden'); }
+        
+        function toggleTroco() {
+            const method = document.getElementById('payment-method').value;
+            const trocoInput = document.getElementById('payment-troco');
+            if (method === 'Dinheiro') {
+                trocoInput.classList.remove('hidden');
+            } else {
+                trocoInput.classList.add('hidden');
+            }
+        }
+
+        // FINALIZAÇÃO DO PEDIDO (WHATSAPP)
+        function checkoutWhatsApp() {
+            if (cart.length === 0) return alert("Seu carrinho está vazio!");
+            
+            const address = document.getElementById('delivery-address').value.trim();
+            if (!address) return alert("Por favor, preencha o endereço de entrega!");
+
+            const reference = document.getElementById('delivery-ref').value.trim();
+            const payment = document.getElementById('payment-method').value;
+            const troco = document.getElementById('payment-troco').value.trim();
+
+            // Montagem do texto do pedido
+            let message = `*🍔 NOVO PEDIDO - BURGER & CIA* \n\n`;
+            message += `--------------------------------\n`;
+            
+            cart.forEach(item => {
+                message += `*${item.quantity}x* ${item.name}\n`;
+                message += `   _Valor: ${(item.price * item.quantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}_\n\n`;
+            });
+
+            const total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+            message += `--------------------------------\n`;
+            message += `*Total Geral:* ${total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n\n`;
+            
+            message += `*📍 Dados de Entrega:*\n`;
+            message += `*Endereço:* ${address}\n`;
+            if (reference) message += `*Referência:* ${reference}\n`;
+            
+            message += `\n*💳 Pagamento:* ${payment}\n`;
+            if (payment === 'Dinheiro' && troco) message += `*Troco para:* ${troco}\n`;
+
+            // Codifica o texto para URL e redireciona
+            const encodedText = encodeURIComponent(message);
+            window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodedText}`, '_blank');
+        }
+    </script>
                   
