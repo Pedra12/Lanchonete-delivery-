@@ -3,196 +3,344 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cardápio Digital - Lanchonete</title>
+    <title>Lanchonete Delivery - Cardápio Interativo</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f9f6f0;
-            color: #333;
-            padding-bottom: 80px;
-        }
-
-        header {
-            background-color: #d32f2f;
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        header h1 {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        header p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        .category-title {
-            font-size: 18px;
-            color: #d32f2f;
-            margin: 25px 0 10px 0;
-            border-left: 4px solid #d32f2f;
-            padding-left: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .menu-item {
-            background: white;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .item-details {
-            flex: 1;
-            padding-right: 10px;
-        }
-
-        .item-name {
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-
-        .item-description {
-            font-size: 13px;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .item-price {
-            font-weight: bold;
-            color: #2e7d32;
-            font-size: 16px;
-            white-space: nowrap;
-        }
-
-        .footer-action {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            padding: 15px;
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
-            text-align: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .btn-whatsapp {
-            background-color: #25d366;
-            color: white;
-            text-decoration: none;
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            max-width: 90%;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .btn-whatsapp:active {
-            transform: scale(0.98);
-        }
+        /* Ajuste fino para suavizar transições */
+        .cart-modal { transition: transform 0.3s ease-in-out; }
     </style>
 </head>
-<body>
+<body class="bg-zinc-950 text-zinc-50 font-sans min-h-screen pb-24">
 
-    <header>
-        <h1>🍔 Minha Lanchonete</h1>
-        <p>Faça seu pedido pelo WhatsApp - Entregas Rápidas!</p>
+    <header class="w-full bg-zinc-900 border-b border-zinc-800 sticky top-0 z-40 shadow-xl">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-500 text-zinc-950 p-2.5 rounded-2xl shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-burger text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-black tracking-wide uppercase text-amber-500">Burger & Cia</h1>
+                    <p class="text-xs text-zinc-400 flex items-center gap-1">
+                        <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> Aberto agora
+                    </p>
+                </div>
+            </div>
+            
+            <button onclick="toggleCart(true)" class="relative bg-amber-500 hover:bg-amber-400 text-zinc-950 px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition duration-200 cursor-pointer shadow-lg shadow-amber-500/10">
+                <i class="fa-solid fa-cart-shopping text-lg"></i>
+                <span class="hidden md:inline">Meu Carrinho</span>
+                <span id="cart-count-badge" class="bg-zinc-950 text-amber-400 text-xs w-5 h-5 rounded-full flex items-center justify-center font-black absolute -top-2 -right-2 border border-amber-500">0</span>
+            </button>
+        </div>
     </header>
 
-    <div class="container">
-        <div class="category-title">Hambúrgueres Artesanais</div>
-        
-        <div class="menu-item">
-            <div class="item-details">
-                <div class="item-name">X-Burguer Clássico</div>
-                <div class="item-description">Pão artesanal, blend bovino 150g, muito queijo prato derretido e maionese da casa.</div>
+    <div class="w-full max-w-6xl mx-auto px-4 mt-6">
+        <div class="w-full h-44 md:h-64 rounded-3xl overflow-hidden relative bg-cover bg-center shadow-2xl" style="background-image: linear-gradient(to top, rgba(9, 9, 11, 0.95), rgba(9, 9, 11, 0.4)), url('https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop');">
+            <div class="absolute bottom-6 left-6 md:left-10 max-w-lg">
+                <span class="bg-amber-500/20 text-amber-400 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider border border-amber-500/30">Os Melhores da Região</span>
+                <h2 class="text-2xl md:text-4xl font-black mt-2 tracking-tight">Mate sua fome com quem entende de sabor.</h2>
             </div>
-            <div class="item-price">R$ 22,00</div>
-        </div>
-
-        <div class="menu-item">
-            <div class="item-details">
-                <div class="item-name">X-Salada Especial</div>
-                <div class="item-description">Pão, blend bovino 150g, queijo, alface fresquinha, tomate, cebola roxa e molho especial.</div>
-            </div>
-            <div class="item-price">R$ 24,00</div>
-        </div>
-
-        <div class="menu-item">
-            <div class="item-details">
-                <div class="item-name">Super Bacon Monster</div>
-                <div class="item-description">Para os fortes: 2 blends de 150g, cheddar duplo, muito bacon crocante e molho barbecue.</div>
-            </div>
-            <div class="item-price">R$ 32,00</div>
-        </div>
-
-        <div class="category-title">Acompanhamentos</div>
-        
-        <div class="menu-item">
-            <div class="item-details">
-                <div class="item-name">Batata Frita Palito</div>
-                <div class="item-description">Porção individual de batata frita super crocante e sequinha.</div>
-            </div>
-            <div class="item-price">R$ 12,00</div>
-        </div>
-
-        <div class="category-title">Bebidas</div>
-        
-        <div class="menu-item">
-            <div class="item-details">
-                <div class="item-name">Refrigerante Lata</div>
-                <div class="item-description">Coca-Cola, Guaraná Antarctica ou Fanta (350ml).</div>
-            </div>
-            <div class="item-price">R$ 6,00</div>
-        </div>
-
-        <div class="menu-item">
-            <div class="item-details">
-                <div class="item-name">Suco Natural de Laranja</div>
-                <div class="item-description">Suco natural da fruta, bem gelado (400ml).</div>
-            </div>
-            <div class="item-price">R$ 8,00</div>
         </div>
     </div>
 
-    <div class="footer-action">
-        <a href="https://wa.me/5527998987359?text=Olá! Gostaria de fazer um pedido." class="btn-whatsapp" target="_blank">
-            🟢 Fazer Pedido no WhatsApp
-        </a>
+    <main class="max-w-6xl mx-auto px-4 mt-10">
+        <h3 class="text-xl font-black text-zinc-100 border-b-2 border-amber-500 w-fit pb-2 mb-6 tracking-wide uppercase">🍔 Nosso Cardápio</h3>
+        
+        <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+    </main>
+
+    <div id="cart-sidebar" class="fixed inset-0 bg-black/70 z-50 backdrop-blur-sm hidden flex justify-end">
+        <div class="w-full max-w-md bg-zinc-900 h-full flex flex-col shadow-2xl border-l border-zinc-800">
+            
+            <div class="p-4 border-b border-zinc-800 flex justify-between items-center bg-zinc-950">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping text-amber-500 text-xl"></i>
+                    <h3 class="text-lg font-black tracking-wide uppercase">Seu Pedido</h3>
+                </div>
+                <button onclick="toggleCart(false)" class="text-zinc-400 hover:text-zinc-100 p-2 rounded-lg bg-zinc-800 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-4">
+                <p class="text-center text-zinc-500 py-10">Seu carrinho está vazio.</p>
+            </div>
+
+            <div class="p-4 border-t border-zinc-800 bg-zinc-950 space-y-4 shadow-[0_-4px_20px_rgba(0,0,0,0.4)]">
+                <div class="flex justify-between items-center text-lg font-black border-b border-zinc-800 pb-3">
+                    <span>Total do Pedido:</span>
+                    <span id="cart-total" class="text-amber-500">R$ 0,00</span>
+                </div>
+
+                <div class="space-y-3 max-h-64 overflow-y-auto pr-1">
+                    <h4 class="text-xs font-black text-zinc-400 uppercase tracking-wider">📍 Dados para Entrega</h4>
+                    
+                    <input type="text" id="cust-name" placeholder="Seu Nome Completo" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500">
+                    
+                    <input type="tel" id="cust-phone" placeholder="Seu Telefone / WhatsApp" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500">
+                    
+                    <div class="grid grid-cols-3 gap-2">
+                        <input type="text" id="cust-street" placeholder="Rua / Av." class="col-span-2 bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500">
+                        <input type="text" id="cust-number" placeholder="Nº" class="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" id="cust-bairro" placeholder="Bairro" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500">
+                        <input type="text" id="cust-ref" placeholder="Ponto de Ref." class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500">
+                    </div>
+
+                    <h4 class="text-xs font-black text-zinc-400 uppercase tracking-wider pt-2">💳 Forma de Pagamento</h4>
+                    <select id="payment-method" onchange="handlePaymentChange()" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 focus:outline-none focus:border-amber-500 cursor-pointer">
+                        <option value="Pix">Pix</option>
+                        <option value="Cartão de Crédito">Cartão de Crédito</option>
+                        <option value="Cartão de Débito">Cartão de Débito</option>
+                        <option value="Dinheiro">Dinheiro</option>
+                    </select>
+
+                    <div id="change-container" class="hidden animate-fade-in">
+                        <label class="text-xs text-zinc-400 block mb-1">Precisa de troco para quanto?</label>
+                        <input type="text" id="payment-change" placeholder="Ex: R$ 50 ou R$ 100" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+
+                <button onclick="sendOrder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3.5 rounded-xl font-black text-base flex items-center justify-center gap-2 cursor-pointer transition duration-200 shadow-xl shadow-emerald-950/30">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    Finalizar e Enviar via WhatsApp
+                </button>
+            </div>
+        </div>
     </div>
 
-</body>
-  </html>
+    <div id="mobile-footer" class="fixed bottom-0 inset-x-0 bg-zinc-900 border-t border-zinc-800 p-4 flex justify-between items-center md:hidden z-30 shadow-[0_-4px_15px_rgba(0,0,0,0.5)]">
+        <div>
+            <p class="text-xs text-zinc-400">Total sem entrega:</p>
+            <p id="mobile-total" class="text-lg font-black text-amber-500">R$ 0,00</p>
+        </div>
+        <button onclick="toggleCart(true)" class="bg-amber-500 text-zinc-950 font-black px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg cursor-pointer text-sm">
+            Ver Carrinho <i class="fa-solid fa-chevron-right text-xs"></i>
+        </button>
+    </div>
+
+    <script>
+        // CONFIGURAÇÃO: Insira o seu número do WhatsApp aqui (DDD + Número, apenas números)
+        const WHATSAPP_NUMBER = "5527999999999"; 
+
+        // BANCO DE DADOS DOS PRODUTOS DO CARDÁPIO
+        const PRODUCTS = [
+            {
+                id: 1,
+                name: "Smash Burger Duplo",
+                price: 22.00,
+                description: "Pão brioche selado na manteiga, dois blends de carne artesanal de 90g grelhados no ponto certo, queijo cheddar derretido, alface crespa fresca, tomate e nosso molho especial da casa.",
+                image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=500&auto=format&fit=crop"
+            },
+            {
+                id: 2,
+                name: "Monster Bacon Burger",
+                price: 32.00,
+                description: "Pão australiano macio, um super blend artesanal de 180g cheio de suculência, camadas generosas de bacon super crocante, queijo prato derretido e cebola caramelizada artesanal.",
+                image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=500&auto=format&fit=crop"
+            },
+            {
+                id: 3,
+                name: "Chicken Cheddar Crispy",
+                price: 26.00,
+                description: "Pão brioche premium, filé de frango empanado super crocante por fora e suculento por dentro, muito cheddar cremoso injetado e maionese verde temperada com ervas.",
+                image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?q=80&w=500&auto=format&fit=crop"
+            },
+            {
+                id: 4,
+                name: "Batata Frita Suprema",
+                price: 18.00,
+                description: "Porção generosa de batatas palito selecionadas, fritas até ficarem douradas e sequinhas, cobertas com uma camada de queijo cheddar cremoso quente e salpicadas com farofa de bacon.",
+                image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=500&auto=format&fit=crop"
+            },
+            {
+                id: 5,
+                name: "Combo Duplo Clássico",
+                price: 54.00,
+                description: "O combo perfeito para dividir (ou não): Contém 2 Smash Burgers Duplos completos, 1 porção média de Batata Frita Tradicional crocante e 2 latas de refrigerante trincando de geladas.",
+                image: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?q=80&w=500&auto=format&fit=crop"
+            }
+        ];
+
+        let cart = [];
+
+        // Inicializa o site renderizando os itens na tela
+        function init() {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = PRODUCTS.map(prod => `
+                <div class="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden shadow-lg hover:border-zinc-700 transition duration-300 flex flex-col justify-between group">
+                    <div class="relative overflow-hidden h-48 bg-zinc-800">
+                        <img src="${prod.image}" alt="${prod.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-3 right-3 bg-zinc-950/80 backdrop-blur-md px-3 py-1 rounded-full text-amber-500 font-black text-sm border border-zinc-800">
+                            R$ ${prod.price.toFixed(2).replace('.', ',')}
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between gap-4">
+                        <div>
+                            <h4 class="text-lg font-black text-zinc-100 mb-2 tracking-tight group-hover:text-amber-500 transition">${prod.name}</h4>
+                            <p class="text-sm text-zinc-400 leading-relaxed font-light">${prod.description}</p>
+                        </div>
+                        <button onclick="addToCart(${prod.id})" class="w-full bg-zinc-800 hover:bg-amber-500 hover:text-zinc-950 text-zinc-100 font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-200 cursor-pointer">
+                            <i class="fa-solid fa-plus text-xs"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            updateCartUI();
+        }
+
+        // Abre ou Fecha o Modal do Carrinho
+        function toggleCart(open) {
+            const sidebar = document.getElementById('cart-sidebar');
+            if (open) {
+                sidebar.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('hidden');
+            }
+        }
+
+        // Adiciona um item ou incrementa a quantidade
+        function addToCart(id) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                const product = PRODUCTS.find(p => p.id === id);
+                cart.push({ ...product, quantity: 1 });
+            }
+            updateCartUI();
+        }
+
+        // Altera a quantidade de itens direto no carrinho (+ ou -)
+        function changeQuantity(id, delta) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+            }
+            updateCartUI();
+        }
+
+        // Mostra ou esconde o campo de troco com base na seleção de pagamento
+        function handlePaymentChange() {
+            const method = document.getElementById('payment-method').value;
+            const changeContainer = document.getElementById('change-container');
+            if (method === 'Dinheiro') {
+                changeContainer.classList.remove('hidden');
+            } else {
+                changeContainer.classList.add('hidden');
+            }
+        }
+
+        // Atualiza toda a Interface do Carrinho, Totais e Badges
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const totalElement = document.getElementById('cart-total');
+            const mobileTotalElement = document.getElementById('mobile-total');
+            const badge = document.getElementById('cart-count-badge');
+            const mobileFooter = document.getElementById('mobile-footer');
+
+            if (cart.length === 0) {
+                container.innerHTML = `<p class="text-center text-zinc-500 py-10">Seu carrinho está vazio.</p>`;
+                totalElement.innerText = "R$ 0,00";
+                mobileTotalElement.innerText = "R$ 0,00";
+                badge.innerText = "0";
+                mobileFooter.classList.add('hidden');
+                return;
+            }
+
+            mobileFooter.classList.remove('hidden');
+            
+            let total = 0;
+            let totalItems = 0;
+
+            container.innerHTML = cart.map(item => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                totalItems += item.quantity;
+
+                return `
+                    <div class="bg-zinc-950 p-3 rounded-xl border border-zinc-800 flex justify-between items-center gap-3">
+                        <div class="flex-1">
+                            <h5 class="text-sm font-bold text-zinc-100">${item.name}</h5>
+                            <span class="text-xs text-amber-500 font-bold">R$ ${item.price.toFixed(2).replace('.', ',')}</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-zinc-900 px-2 py-1 rounded-lg border border-zinc-800">
+                            <button onclick="changeQuantity(${item.id}, -1)" class="text-zinc-400 hover:text-zinc-100 px-1 font-bold text-xs cursor-pointer">-</button>
+                            <span class="text-sm font-bold text-zinc-200 min-w-[16px] text-center">${item.quantity}</span>
+                            <button onclick="changeQuantity(${item.id}, 1)" class="text-zinc-400 hover:text-zinc-100 px-1 font-bold text-xs cursor-pointer">+</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            badge.innerText = totalItems;
+            totalElement.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+            mobileTotalElement.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        }
+
+        // Constrói a mensagem e direciona para o WhatsApp da loja
+        function sendOrder() {
+            if (cart.length === 0) {
+                alert("Seu carrinho está vazio!");
+                return;
+            }
+
+            // Captura e valida dados do formulário
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const street = document.getElementById('cust-street').value.trim();
+            const number = document.getElementById('cust-number').value.trim();
+            const bairro = document.getElementById('cust-bairro').value.trim();
+            const ref = document.getElementById('cust-ref').value.trim();
+            const payment = document.getElementById('payment-method').value;
+            const change = document.getElementById('payment-change').value.trim();
+
+            if (!name || !phone || !street || !number || !bairro) {
+                alert("Por favor, preencha todos os campos obrigatórios do endereço e contato!");
+                return;
+            }
+
+            // Monta a string do pedido formatada de forma limpa
+            let msg = `*🍔 NOVO PEDIDO - BURGER & CIA*\n`;
+            msg += `-------------------------------------------\n`;
+            msg += `*👤 CLIENTE:* ${name}\n`;
+            msg += `*📞 CONTATO:* ${phone}\n\n`;
+            msg += `*📍 ENDEREÇO DE ENTREGA:*\n`;
+            msg += `${street}, Nº ${number}\n`;
+            msg += `Bairro: ${bairro}\n`;
+            if (ref) msg += `Ref: ${ref}\n`;
+            msg += `-------------------------------------------\n\n`;
+            msg += `*🛒 ITENS DO PEDIDO:*\n`;
+
+            let total = 0;
+            cart.forEach(item => {
+                const sub = item.price * item.quantity;
+                total += sub;
+                msg += `• ${item.quantity}x ${item.name} (${item.quantity}x R$ ${item.price.toFixed(2).replace('.', ',')})\n`;
+            });
+
+            msg += `\n-------------------------------------------\n`;
+            msg += `*💰 TOTAL DOS PRODUTOS:* R$ ${total.toFixed(2).replace('.', ',')}\n`;
+            msg += `*💳 FORMA DE PAGAMENTO:* ${payment}\n`;
+
+            if (payment === 'Dinheiro' && change) {
+                msg += `*💵 LEVAR TROCO PARA:* ${change}\n`;
+            }
+            msg += `-------------------------------------------`;
+
+            // Codifica o texto para URL válida e redireciona
+            const encodedText = encodeURIComponent(msg);
+            const targetUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodedText}`;
+            
+            window.open(targetUrl, '_blank');
+        }
+
+        // Carrega o catálogo na tela assim que abrir o site
   
