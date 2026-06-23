@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio Digital - Lanchonete</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f6f0;
+            color: #333;
+            padding-bottom: 80px;
+        }
+
+        header {
+            background-color: #d32f2f;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .category-title {
+            font-size: 18px;
+            color: #d32f2f;
+            margin: 25px 0 10px 0;
+            border-left: 4px solid #d32f2f;
+            padding-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-details {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .item-name {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .item-description {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .item-price {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+
+        .footer-action {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-whatsapp {
+            background-color: #25d366;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 90%;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-whatsapp:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🍔 Minha Lanchonete</h1>
+        <p>Faça seu pedido pelo WhatsApp - Entregas Rápidas!</p>
+    </header>
+
+    <div class="container">
+        <div class="category-title">Hambúrgueres Artesanais</div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <div class="item-name">X-Burguer Clássico</div>
+                <div class="item-description">Pão artesanal, blend bovino 150g, muito queijo prato derretido e maionese da casa.</div>
+            </div>
+            <div class="item-price">R$ 22,00</div>
+        </div>
+
+        <div class="menu-item">
+            <div class="item-details">
+                <div class="item-name">X-Salada Especial</div>
+                <div class="item-description">Pão, blend bovino 150g, queijo, alface fresquinha, tomate, cebola roxa e molho especial.</div>
+            </div>
+            <div class="item-price">R$ 24,00</div>
+        </div>
+
+        <div class="menu-item">
+            <div class="item-details">
+                <div class="item-name">Super Bacon Monster</div>
+                <div class="item-description">Para os fortes: 2 blends de 150g, cheddar duplo, muito bacon crocante e molho barbecue.</div>
+            </div>
+            <div class="item-price">R$ 32,00</div>
+        </div>
+
+        <div class="category-title">Acompanhamentos</div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <div class="item-name">Batata Frita Palito</div>
+                <div class="item-description">Porção individual de batata frita super crocante e sequinha.</div>
+            </div>
+            <div class="item-price">R$ 12,00</div>
+        </div>
+
+        <div class="category-title">Bebidas</div>
+        
+        <div class="menu-item">
+            <div class="item-details">
+                <div class="item-name">Refrigerante Lata</div>
+                <div class="item-description">Coca-Cola, Guaraná Antarctica ou Fanta (350ml).</div>
+            </div>
+            <div class="item-price">R$ 6,00</div>
+        </div>
+
+        <div class="menu-item">
+            <div class="item-details">
+                <div class="item-name">Suco Natural de Laranja</div>
+                <div class="item-description">Suco natural da fruta, bem gelado (400ml).</div>
+            </div>
+            <div class="item-price">R$ 8,00</div>
+        </div>
+    </div>
+
+    <div class="footer-action">
+        <a href="https://wa.me/5527998987359?text=Olá! Gostaria de fazer um pedido." class="btn-whatsapp" target="_blank">
+            🟢 Fazer Pedido no WhatsApp
+        </a>
+    </div>
+
+</body>
+  </html>
+
