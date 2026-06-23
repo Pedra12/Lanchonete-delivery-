@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lanchonete Delivery - Cardápio Interativo</title>
+    <title>Lanchonete Delivery - Cardápio Completo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Remove a barra de rolagem visual dos botões de categorias, mantendo o funcionamento */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
 <body class="bg-neutral-950 text-neutral-50 font-sans min-h-screen pb-24">
 
@@ -23,7 +28,7 @@
                 </div>
             </div>
             
-            <button onclick="toggleCart(true)" class="relative bg-amber-500 hover:bg-amber-400 text-neutral-950 px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition duration-200 shadow-lg">
+            <button onclick="toggleCart(true)" class="relative bg-amber-500 hover:bg-amber-400 text-neutral-950 px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition duration-200 shadow-lg cursor-pointer">
                 <i class="fa-solid fa-cart-shopping text-lg"></i>
                 <span class="hidden md:inline">Meu Carrinho</span>
                 <span id="cart-count-badge" class="bg-neutral-950 text-amber-400 text-xs w-5 h-5 rounded-full flex items-center justify-center font-black absolute -top-2 -right-2 border border-amber-500">0</span>
@@ -40,12 +45,23 @@
         </div>
     </div>
 
-    <main class="max-w-6xl mx-auto px-4 mt-10">
-        <h3 class="text-xl font-black text-neutral-100 border-b-2 border-amber-500 w-fit pb-2 mb-6 tracking-wide uppercase">🍔 Nosso Cardápio</h3>
-        
-        <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            </div>
-    </main>
+    <div class="w-full max-w-6xl mx-auto px-4 mt-6 sticky top-[73px] bg-neutral-950/90 backdrop-blur-md py-3 z-30 border-b border-neutral-900/50 overflow-x-auto no-scrollbar flex gap-2">
+        <a href="#cat-gourmet" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500 px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 text-zinc-300 hover:text-amber-400">
+            ✨ Gourmets
+        </a>
+        <a href="#cat-tradicional" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500 px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 text-zinc-300 hover:text-amber-400">
+            🍔 Tradicionais
+        </a>
+        <a href="#cat-bebidas" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500 px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 text-zinc-300 hover:text-amber-400">
+            🥤 Bebidas
+        </a>
+        <a href="#cat-sobremesas" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500 px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 text-zinc-300 hover:text-amber-400">
+            🍨 Sobremesas
+        </a>
+    </div>
+
+    <main id="menu-container" class="max-w-6xl mx-auto px-4 mt-8">
+        </main>
 
     <div id="cart-sidebar" class="fixed inset-0 bg-black/70 z-50 backdrop-blur-sm hidden flex justify-end">
         <div class="w-full max-w-md bg-neutral-900 h-full flex flex-col shadow-2xl border-l border-neutral-800">
@@ -55,7 +71,7 @@
                     <i class="fa-solid fa-cart-shopping text-amber-500 text-xl"></i>
                     <h3 class="text-lg font-black tracking-wide uppercase">Seu Pedido</h3>
                 </div>
-                <button onclick="toggleCart(false)" class="text-neutral-400 hover:text-neutral-100 p-2 rounded-lg bg-neutral-800">
+                <button onclick="toggleCart(false)" class="text-neutral-400 hover:text-neutral-100 p-2 rounded-lg bg-neutral-800 cursor-pointer">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
@@ -73,7 +89,7 @@
                 <div class="space-y-3 max-h-64 overflow-y-auto pr-1">
                     <h4 class="text-xs font-black text-neutral-400 uppercase tracking-wider">📍 Dados para Entrega</h4>
                     
-                    <input type="text" id="cust-name" placeholder="Seu Name Completo" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
+                    <input type="text" id="cust-name" placeholder="Seu Nome Completo" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
                     
                     <input type="tel" id="cust-phone" placeholder="Seu Telefone / WhatsApp" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
                     
@@ -88,7 +104,7 @@
                     </div>
 
                     <h4 class="text-xs font-black text-neutral-400 uppercase tracking-wider pt-2">💳 Forma de Pagamento</h4>
-                    <select id="payment-method" onchange="handlePaymentChange()" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:border-amber-500">
+                    <select id="payment-method" onchange="handlePaymentChange()" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:border-amber-500 cursor-pointer">
                         <option value="Pix">Pix</option>
                         <option value="Cartão de Crédito">Cartão de Crédito</option>
                         <option value="Cartão de Débito">Cartão de Débito</option>
@@ -101,7 +117,7 @@
                     </div>
                 </div>
 
-                <button onclick="sendOrder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3.5 rounded-xl font-black text-base flex items-center justify-center gap-2 transition duration-200 shadow-xl">
+                <button onclick="sendOrder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3.5 rounded-xl font-black text-base flex items-center justify-center gap-2 transition duration-200 shadow-xl cursor-pointer">
                     <i class="fa-brands fa-whatsapp text-xl"></i>
                     Finalizar e Enviar via WhatsApp
                 </button>
@@ -114,7 +130,7 @@
             <p class="text-xs text-neutral-400">Total sem entrega:</p>
             <p id="mobile-total" class="text-lg font-black text-amber-500">R$ 0,00</p>
         </div>
-        <button onclick="toggleCart(true)" class="bg-amber-500 text-neutral-950 font-black px-5 py-2.5 rounded-xl flex items-center gap-2 text-sm">
+        <button onclick="toggleCart(true)" class="bg-amber-500 text-neutral-950 font-black px-5 py-2.5 rounded-xl flex items-center gap-2 text-sm cursor-pointer">
             Ver Carrinho <i class="fa-solid fa-chevron-right text-xs"></i>
         </button>
     </div>
@@ -123,10 +139,20 @@
         // CONFIGURAÇÃO: Insira o número do WhatsApp da loja aqui (Apenas números com DDD)
         const WHATSAPP_NUMBER = "5527999999999"; 
 
-        // CARDÁPIO DE PRODUTOS
+        // MAPEAMENTO DE CATEGORIAS DISPONÍVEIS
+        const CATEGORIES = {
+            gourmet: "✨ Lanches Gourmets",
+            tradicional: "🍔 Lanches Tradicionais",
+            bebidas: "🥤 Bebidas",
+            sobremesas: "🍨 Sobremesas"
+        };
+
+        // CARDÁPIO DE PRODUTOS COMPLETO
         const PRODUCTS = [
+            // LANCHES GOURMETS
             {
                 id: 1,
+                category: "gourmet",
                 name: "Smash Burger Duplo",
                 price: 22.00,
                 description: "Pão brioche selado na manteiga, dois blends de carne artesanal de 90g grelhados, queijo cheddar derretido, alface crespa, tomate e molho especial.",
@@ -134,60 +160,127 @@
             },
             {
                 id: 2,
+                category: "gourmet",
                 name: "Monster Bacon Burger",
                 price: 32.00,
-                description: "Pão australiano macio, blend artesanal de 180g super suculento, camadas de bacon crocante, queijo prato e cebola caramelizada.",
+                description: "Pão australiano macio, blend artesanal de 180g super suculento, muitas camadas de bacon crocante, queijo prato e cebola caramelizada.",
                 image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=500&auto=format&fit=crop"
             },
             {
                 id: 3,
+                category: "gourmet",
                 name: "Chicken Cheddar Crispy",
                 price: 26.00,
-                description: "Pão brioche premium, filé de frango empanado crocante, muito cheddar cremoso quente e maionese verde artesanal.",
+                description: "Pão brioche premium, filé de frango empanado crocante por fora e suculento por dentro, muito cheddar cremoso quente e maionese verde artesanal.",
                 image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?q=80&w=500&auto=format&fit=crop"
             },
+            // LANCHES TRADICIONAIS
             {
                 id: 4,
-                name: "Batata Frita Suprema",
-                price: 18.00,
-                description: "Batatas palito selecionadas fritas na hora, cobertas com uma camada generosa de cheddar cremoso e farofa de bacon crocante.",
-                image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=500&auto=format&fit=crop"
+                category: "tradicional",
+                name: "X-Salada Tradicional",
+                price: 16.00,
+                description: "Pão de hambúrguer clássico com gergelim, blend de carne tradicional de 120g, queijo prato derretido, alface crespa, tomate fresco e maionese da casa.",
+                image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?q=80&w=500&auto=format&fit=crop"
             },
             {
                 id: 5,
-                name: "Combo Duplo Clássico",
-                price: 54.00,
-                description: "Contém: 2 Smash Burgers Duplos completos, 1 porção média de Batata Frita Tradicional e 2 latas de refrigerante trincando de geladas.",
-                image: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?q=80&w=500&auto=format&fit=crop"
+                category: "tradicional",
+                name: "X-Bacon Egg Clássico",
+                price: 20.00,
+                description: "Pão tradicional de lanchonete, blend de carne 120g, ovo frito na chapa, fatias de bacon crocante, queijo prato e maionese especial.",
+                image: "https://images.unsplash.com/photo-1549611016-3a70d82b5040?q=80&w=500&auto=format&fit=crop"
+            },
+            // BEBIDAS
+            {
+                id: 6,
+                category: "bebidas",
+                name: "Água Mineral (Sem Gás)",
+                price: 4.00,
+                description: "Garrafa de 500ml de água mineral pura, servida trincando de gelada.",
+                image: "https://images.unsplash.com/photo-1608885898957-a599fb1698d6?q=80&w=500&auto=format&fit=crop"
+            },
+            {
+                id: 7,
+                category: "bebidas",
+                name: "Coca-Cola Lata",
+                price: 6.00,
+                description: "Lata de 350ml refrescante, perfeita para acompanhar o seu lanche.",
+                image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=500&auto=format&fit=crop"
+            },
+            {
+                id: 8,
+                category: "bebidas",
+                name: "Suco de Laranja Natural",
+                price: 8.50,
+                description: "Copo de 400ml de suco de laranja natural, espremido na hora, sem conservantes.",
+                image: "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?q=80&w=500&auto=format&fit=crop"
+            },
+            // SOBREMESAS
+            {
+                id: 9,
+                category: "sobremesas",
+                name: "Pudim de Leite Moça",
+                price: 8.00,
+                description: "Fatia generosa de pudim caseiro super cremoso, coberto com calda de caramelo artesanal perfeita.",
+                image: "https://images.unsplash.com/photo-1528975604071-b4dc52a2d18c?q=80&w=500&auto=format&fit=crop"
+            },
+            {
+                id: 10,
+                category: "sobremesas",
+                name: "Brownie com Sorvete",
+                price: 14.50,
+                description: "Brownie de chocolate meio amargo quentinho com pedaços de nozes, acompanhado de uma bola de sorvete de creme.",
+                image: "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?q=80&w=500&auto=format&fit=crop"
             }
         ];
 
         let cart = [];
 
-        // Força a renderização assim que o documento estiver pronto
+        // Renderiza as seções e os produtos de forma totalmente organizada
         function init() {
-            const grid = document.getElementById('products-grid');
-            if(!grid) return;
-            
-            grid.innerHTML = PRODUCTS.map(prod => `
-                <div class="bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden shadow-lg hover:border-neutral-700 transition duration-300 flex flex-col justify-between group">
-                    <div class="relative overflow-hidden h-48 bg-neutral-800">
-                        <img src="${prod.image}" alt="${prod.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute top-3 right-3 bg-neutral-950/80 backdrop-blur-md px-3 py-1 rounded-full text-amber-500 font-black text-sm border border-neutral-800">
-                            R$ ${prod.price.toFixed(2).replace('.', ',')}
+            const menuContainer = document.getElementById('menu-container');
+            if (!menuContainer) return;
+
+            let htmlContent = '';
+
+            // Varre cada categoria definida e cria blocos separados na interface
+            for (const [key, title] of Object.entries(CATEGORIES)) {
+                const filteredProducts = PRODUCTS.filter(p => p.category === key);
+
+                if (filteredProducts.length > 0) {
+                    htmlContent += `
+                        <div id="cat-${key}" class="mb-14 scroll-mt-36">
+                            <h3 class="text-xl font-black text-neutral-100 border-b-2 border-amber-500 w-fit pb-2 mb-6 tracking-wide uppercase">
+                                ${title}
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                ${filteredProducts.map(prod => `
+                                    <div class="bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden shadow-lg hover:border-neutral-700 transition duration-300 flex flex-col justify-between group">
+                                        <div class="relative overflow-hidden h-48 bg-neutral-800">
+                                            <img src="${prod.image}" alt="${prod.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                            <div class="absolute top-3 right-3 bg-neutral-950/80 backdrop-blur-md px-3 py-1 rounded-full text-amber-500 font-black text-sm border border-neutral-800">
+                                                R$ ${prod.price.toFixed(2).replace('.', ',')}
+                                            </div>
+                                        </div>
+                                        <div class="p-5 flex-1 flex flex-col justify-between gap-4">
+                                            <div>
+                                                <h4 class="text-lg font-black text-neutral-100 mb-2 tracking-tight group-hover:text-amber-500 transition">${prod.name}</h4>
+                                                <p class="text-sm text-neutral-400 leading-relaxed font-light">${prod.description}</p>
+                                            </div>
+                                            <button onclick="addToCart(${prod.id})" class="w-full bg-neutral-800 hover:bg-amber-500 hover:text-neutral-950 text-neutral-100 font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-200 cursor-pointer">
+                                                <i class="fa-solid fa-plus text-xs"></i> Adicionar ao Carrinho
+                                            </button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
                         </div>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col justify-between gap-4">
-                        <div>
-                            <h4 class="text-lg font-black text-neutral-100 mb-2 tracking-tight group-hover:text-amber-500 transition">${prod.name}</h4>
-                            <p class="text-sm text-neutral-400 leading-relaxed font-light">${prod.description}</p>
-                        </div>
-                        <button onclick="addToCart(${prod.id})" class="w-full bg-neutral-800 hover:bg-amber-500 hover:text-neutral-950 text-neutral-100 font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-200">
-                            <i class="fa-solid fa-plus text-xs"></i> Adicionar ao Carrinho
-                        </button>
-                    </div>
-                </div>
-            `).join('');
+                    `;
+                }
+            }
+
+            menuContainer.innerHTML = htmlContent;
             updateCartUI();
         }
 
@@ -237,101 +330,4 @@
                 container.innerHTML = `<p class="text-center text-neutral-500 py-10">Seu carrinho está vazio.</p>`;
                 totalElement.innerText = "R$ 0,00";
                 mobileTotalElement.innerText = "R$ 0,00";
-                badge.innerText = "0";
-                mobileFooter.classList.add('hidden');
-                return;
-            }
-
-            mobileFooter.classList.remove('hidden');
-            
-            let total = 0;
-            let totalItems = 0;
-
-            container.innerHTML = cart.map(item => {
-                const subtotal = item.price * item.quantity;
-                total += subtotal;
-                totalItems += item.quantity;
-
-                return `
-                    <div class="bg-neutral-950 p-3 rounded-xl border border-neutral-800 flex justify-between items-center gap-3">
-                        <div class="flex-1">
-                            <h5 class="text-sm font-bold text-neutral-100">${item.name}</h5>
-                            <span class="text-xs text-amber-500 font-bold">R$ ${item.price.toFixed(2).replace('.', ',')}</span>
-                        </div>
-                        <div class="flex items-center gap-2 bg-neutral-900 px-2 py-1 rounded-lg border border-neutral-800">
-                            <button onclick="changeQuantity(${item.id}, -1)" class="text-neutral-400 hover:text-neutral-100 px-1 font-bold text-xs">-</button>
-                            <span class="text-sm font-bold text-neutral-200 min-w-[16px] text-center">${item.quantity}</span>
-                            <button onclick="changeQuantity(${item.id}, 1)" class="text-neutral-400 hover:text-neutral-100 px-1 font-bold text-xs">+</button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            badge.innerText = totalItems;
-            totalElement.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
-            mobileTotalElement.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
-        }
-
-        function sendOrder() {
-            if (cart.length === 0) {
-                alert("Seu carrinho está vazio!");
-                return;
-            }
-
-            const name = document.getElementById('cust-name').value.trim();
-            const phone = document.getElementById('cust-phone').value.trim();
-            const street = document.getElementById('cust-street').value.trim();
-            const number = document.getElementById('cust-number').value.trim();
-            const bairro = document.getElementById('cust-bairro').value.trim();
-            const ref = document.getElementById('cust-ref').value.trim();
-            const payment = document.getElementById('payment-method').value;
-            const change = document.getElementById('payment-change').value.trim();
-
-            if (!name || !phone || !street || !number || !bairro) {
-                alert("Por favor, preencha todos os campos obrigatórios do endereço e contato!");
-                return;
-            }
-
-            let msg = `*🍔 NOVO PEDIDO - BURGER & CIA*\n`;
-            msg += `-------------------------------------------\n`;
-            msg += `*👤 CLIENTE:* ${name}\n`;
-            msg += `*📞 CONTATO:* ${phone}\n\n`;
-            msg += `*📍 ENDEREÇO DE ENTREGA:*\n`;
-            msg += `${street}, Nº ${number}\n`;
-            msg += `Bairro: ${bairro}\n`;
-            if (ref) msg += `Ref: ${ref}\n`;
-            msg += `-------------------------------------------\n\n`;
-            msg += `*🛒 ITENS DO PEDIDO:*\n`;
-
-            let total = 0;
-            cart.forEach(item => {
-                const sub = item.price * item.quantity;
-                total += sub;
-                msg += `• ${item.quantity}x ${item.name} (${item.quantity}x R$ ${item.price.toFixed(2).replace('.', ',')})\n`;
-            });
-
-            msg += `\n-------------------------------------------\n`;
-            msg += `*💰 TOTAL DOS PRODUTOS:* R$ ${total.toFixed(2).replace('.', ',')}\n`;
-            msg += `*💳 FORMA DE PAGAMENTO:* ${payment}\n`;
-
-            if (payment === 'Dinheiro' && change) {
-                msg += `*💵 LEVAR TROCO PARA:* ${change}\n`;
-            }
-            msg += `-------------------------------------------`;
-
-            const encodedText = encodeURIComponent(msg);
-            const targetUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodedText}`;
-            
-            window.open(targetUrl, '_blank');
-        }
-
-        // Garante a execução segura independente da velocidade de carregamento da página
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            init();
-        }
-    </script>
-</body>
-    </html>
-    
+                badge.
