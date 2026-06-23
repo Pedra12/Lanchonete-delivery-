@@ -4,33 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lanchonete Delivery - Cardápio Interativo</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Ajuste fino para suavizar transições */
-        .cart-modal { transition: transform 0.3s ease-in-out; }
-    </style>
 </head>
-<body class="bg-zinc-950 text-zinc-50 font-sans min-h-screen pb-24">
+<body class="bg-neutral-950 text-neutral-50 font-sans min-h-screen pb-24">
 
-    <header class="w-full bg-zinc-900 border-b border-zinc-800 sticky top-0 z-40 shadow-xl">
+    <header class="w-full bg-neutral-900 border-b border-neutral-800 sticky top-0 z-40 shadow-xl">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-amber-500 text-zinc-950 p-2.5 rounded-2xl shadow-lg shadow-amber-500/20">
+                <div class="bg-amber-500 text-neutral-950 p-2.5 rounded-2xl shadow-lg">
                     <i class="fa-solid fa-burger text-2xl"></i>
                 </div>
                 <div>
                     <h1 class="text-xl font-black tracking-wide uppercase text-amber-500">Burger & Cia</h1>
-                    <p class="text-xs text-zinc-400 flex items-center gap-1">
+                    <p class="text-xs text-neutral-400 flex items-center gap-1">
                         <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> Aberto agora
                     </p>
                 </div>
             </div>
             
-            <button onclick="toggleCart(true)" class="relative bg-amber-500 hover:bg-amber-400 text-zinc-950 px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition duration-200 cursor-pointer shadow-lg shadow-amber-500/10">
+            <button onclick="toggleCart(true)" class="relative bg-amber-500 hover:bg-amber-400 text-neutral-950 px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition duration-200 shadow-lg">
                 <i class="fa-solid fa-cart-shopping text-lg"></i>
                 <span class="hidden md:inline">Meu Carrinho</span>
-                <span id="cart-count-badge" class="bg-zinc-950 text-amber-400 text-xs w-5 h-5 rounded-full flex items-center justify-center font-black absolute -top-2 -right-2 border border-amber-500">0</span>
+                <span id="cart-count-badge" class="bg-neutral-950 text-amber-400 text-xs w-5 h-5 rounded-full flex items-center justify-center font-black absolute -top-2 -right-2 border border-amber-500">0</span>
             </button>
         </div>
     </header>
@@ -45,67 +41,67 @@
     </div>
 
     <main class="max-w-6xl mx-auto px-4 mt-10">
-        <h3 class="text-xl font-black text-zinc-100 border-b-2 border-amber-500 w-fit pb-2 mb-6 tracking-wide uppercase">🍔 Nosso Cardápio</h3>
+        <h3 class="text-xl font-black text-neutral-100 border-b-2 border-amber-500 w-fit pb-2 mb-6 tracking-wide uppercase">🍔 Nosso Cardápio</h3>
         
         <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             </div>
     </main>
 
     <div id="cart-sidebar" class="fixed inset-0 bg-black/70 z-50 backdrop-blur-sm hidden flex justify-end">
-        <div class="w-full max-w-md bg-zinc-900 h-full flex flex-col shadow-2xl border-l border-zinc-800">
+        <div class="w-full max-w-md bg-neutral-900 h-full flex flex-col shadow-2xl border-l border-neutral-800">
             
-            <div class="p-4 border-b border-zinc-800 flex justify-between items-center bg-zinc-950">
+            <div class="p-4 border-b border-neutral-800 flex justify-between items-center bg-neutral-950">
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-cart-shopping text-amber-500 text-xl"></i>
                     <h3 class="text-lg font-black tracking-wide uppercase">Seu Pedido</h3>
                 </div>
-                <button onclick="toggleCart(false)" class="text-zinc-400 hover:text-zinc-100 p-2 rounded-lg bg-zinc-800 cursor-pointer">
+                <button onclick="toggleCart(false)" class="text-neutral-400 hover:text-neutral-100 p-2 rounded-lg bg-neutral-800">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
 
             <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-4">
-                <p class="text-center text-zinc-500 py-10">Seu carrinho está vazio.</p>
+                <p class="text-center text-neutral-500 py-10">Seu carrinho está vazio.</p>
             </div>
 
-            <div class="p-4 border-t border-zinc-800 bg-zinc-950 space-y-4 shadow-[0_-4px_20px_rgba(0,0,0,0.4)]">
-                <div class="flex justify-between items-center text-lg font-black border-b border-zinc-800 pb-3">
+            <div class="p-4 border-t border-neutral-800 bg-neutral-950 space-y-4">
+                <div class="flex justify-between items-center text-lg font-black border-b border-neutral-800 pb-3">
                     <span>Total do Pedido:</span>
                     <span id="cart-total" class="text-amber-500">R$ 0,00</span>
                 </div>
 
                 <div class="space-y-3 max-h-64 overflow-y-auto pr-1">
-                    <h4 class="text-xs font-black text-zinc-400 uppercase tracking-wider">📍 Dados para Entrega</h4>
+                    <h4 class="text-xs font-black text-neutral-400 uppercase tracking-wider">📍 Dados para Entrega</h4>
                     
-                    <input type="text" id="cust-name" placeholder="Seu Nome Completo" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500">
+                    <input type="text" id="cust-name" placeholder="Seu Name Completo" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
                     
-                    <input type="tel" id="cust-phone" placeholder="Seu Telefone / WhatsApp" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500">
+                    <input type="tel" id="cust-phone" placeholder="Seu Telefone / WhatsApp" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
                     
                     <div class="grid grid-cols-3 gap-2">
-                        <input type="text" id="cust-street" placeholder="Rua / Av." class="col-span-2 bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500">
-                        <input type="text" id="cust-number" placeholder="Nº" class="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500">
+                        <input type="text" id="cust-street" placeholder="Rua / Av." class="col-span-2 bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
+                        <input type="text" id="cust-number" placeholder="Nº" class="bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
                     </div>
 
                     <div class="grid grid-cols-2 gap-2">
-                        <input type="text" id="cust-bairro" placeholder="Bairro" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500">
-                        <input type="text" id="cust-ref" placeholder="Ponto de Ref." class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500">
+                        <input type="text" id="cust-bairro" placeholder="Bairro" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
+                        <input type="text" id="cust-ref" placeholder="Ponto de Ref." class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
                     </div>
 
-                    <h4 class="text-xs font-black text-zinc-400 uppercase tracking-wider pt-2">💳 Forma de Pagamento</h4>
-                    <select id="payment-method" onchange="handlePaymentChange()" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 focus:outline-none focus:border-amber-500 cursor-pointer">
+                    <h4 class="text-xs font-black text-neutral-400 uppercase tracking-wider pt-2">💳 Forma de Pagamento</h4>
+                    <select id="payment-method" onchange="handlePaymentChange()" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:border-amber-500">
                         <option value="Pix">Pix</option>
                         <option value="Cartão de Crédito">Cartão de Crédito</option>
                         <option value="Cartão de Débito">Cartão de Débito</option>
                         <option value="Dinheiro">Dinheiro</option>
                     </select>
 
-                    <div id="change-container" class="hidden animate-fade-in">
-                        <label class="text-xs text-zinc-400 block mb-1">Precisa de troco para quanto?</label>
-                        <input type="text" id="payment-change" placeholder="Ex: R$ 50 ou R$ 100" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-500">
+                    <div id="change-container" class="hidden">
+                        <label class="text-xs text-neutral-400 block mb-1">Precisa de troco para quanto?</label>
+                        <input type="text" id="payment-change" placeholder="Ex: R$ 50 ou R$ 100" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-amber-500">
                     </div>
                 </div>
 
-                <button onclick="sendOrder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3.5 rounded-xl font-black text-base flex items-center justify-center gap-2 cursor-pointer transition duration-200 shadow-xl shadow-emerald-950/30">
+                <button onclick="sendOrder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3.5 rounded-xl font-black text-base flex items-center justify-center gap-2 transition duration-200 shadow-xl">
                     <i class="fa-brands fa-whatsapp text-xl"></i>
                     Finalizar e Enviar via WhatsApp
                 </button>
@@ -113,78 +109,80 @@
         </div>
     </div>
 
-    <div id="mobile-footer" class="fixed bottom-0 inset-x-0 bg-zinc-900 border-t border-zinc-800 p-4 flex justify-between items-center md:hidden z-30 shadow-[0_-4px_15px_rgba(0,0,0,0.5)]">
+    <div id="mobile-footer" class="fixed bottom-0 inset-x-0 bg-neutral-900 border-t border-neutral-800 p-4 flex justify-between items-center md:hidden z-30 shadow-2xl hidden">
         <div>
-            <p class="text-xs text-zinc-400">Total sem entrega:</p>
+            <p class="text-xs text-neutral-400">Total sem entrega:</p>
             <p id="mobile-total" class="text-lg font-black text-amber-500">R$ 0,00</p>
         </div>
-        <button onclick="toggleCart(true)" class="bg-amber-500 text-zinc-950 font-black px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg cursor-pointer text-sm">
+        <button onclick="toggleCart(true)" class="bg-amber-500 text-neutral-950 font-black px-5 py-2.5 rounded-xl flex items-center gap-2 text-sm">
             Ver Carrinho <i class="fa-solid fa-chevron-right text-xs"></i>
         </button>
     </div>
 
     <script>
-        // CONFIGURAÇÃO: Insira o seu número do WhatsApp aqui (DDD + Número, apenas números)
+        // CONFIGURAÇÃO: Insira o número do WhatsApp da loja aqui (Apenas números com DDD)
         const WHATSAPP_NUMBER = "5527999999999"; 
 
-        // BANCO DE DADOS DOS PRODUTOS DO CARDÁPIO
+        // CARDÁPIO DE PRODUTOS
         const PRODUCTS = [
             {
                 id: 1,
                 name: "Smash Burger Duplo",
                 price: 22.00,
-                description: "Pão brioche selado na manteiga, dois blends de carne artesanal de 90g grelhados no ponto certo, queijo cheddar derretido, alface crespa fresca, tomate e nosso molho especial da casa.",
+                description: "Pão brioche selado na manteiga, dois blends de carne artesanal de 90g grelhados, queijo cheddar derretido, alface crespa, tomate e molho especial.",
                 image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=500&auto=format&fit=crop"
             },
             {
                 id: 2,
                 name: "Monster Bacon Burger",
                 price: 32.00,
-                description: "Pão australiano macio, um super blend artesanal de 180g cheio de suculência, camadas generosas de bacon super crocante, queijo prato derretido e cebola caramelizada artesanal.",
+                description: "Pão australiano macio, blend artesanal de 180g super suculento, camadas de bacon crocante, queijo prato e cebola caramelizada.",
                 image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=500&auto=format&fit=crop"
             },
             {
                 id: 3,
                 name: "Chicken Cheddar Crispy",
                 price: 26.00,
-                description: "Pão brioche premium, filé de frango empanado super crocante por fora e suculento por dentro, muito cheddar cremoso injetado e maionese verde temperada com ervas.",
+                description: "Pão brioche premium, filé de frango empanado crocante, muito cheddar cremoso quente e maionese verde artesanal.",
                 image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?q=80&w=500&auto=format&fit=crop"
             },
             {
                 id: 4,
                 name: "Batata Frita Suprema",
                 price: 18.00,
-                description: "Porção generosa de batatas palito selecionadas, fritas até ficarem douradas e sequinhas, cobertas com uma camada de queijo cheddar cremoso quente e salpicadas com farofa de bacon.",
+                description: "Batatas palito selecionadas fritas na hora, cobertas com uma camada generosa de cheddar cremoso e farofa de bacon crocante.",
                 image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=500&auto=format&fit=crop"
             },
             {
                 id: 5,
                 name: "Combo Duplo Clássico",
                 price: 54.00,
-                description: "O combo perfeito para dividir (ou não): Contém 2 Smash Burgers Duplos completos, 1 porção média de Batata Frita Tradicional crocante e 2 latas de refrigerante trincando de geladas.",
+                description: "Contém: 2 Smash Burgers Duplos completos, 1 porção média de Batata Frita Tradicional e 2 latas de refrigerante trincando de geladas.",
                 image: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?q=80&w=500&auto=format&fit=crop"
             }
         ];
 
         let cart = [];
 
-        // Inicializa o site renderizando os itens na tela
+        // Força a renderização assim que o documento estiver pronto
         function init() {
             const grid = document.getElementById('products-grid');
+            if(!grid) return;
+            
             grid.innerHTML = PRODUCTS.map(prod => `
-                <div class="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden shadow-lg hover:border-zinc-700 transition duration-300 flex flex-col justify-between group">
-                    <div class="relative overflow-hidden h-48 bg-zinc-800">
+                <div class="bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden shadow-lg hover:border-neutral-700 transition duration-300 flex flex-col justify-between group">
+                    <div class="relative overflow-hidden h-48 bg-neutral-800">
                         <img src="${prod.image}" alt="${prod.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute top-3 right-3 bg-zinc-950/80 backdrop-blur-md px-3 py-1 rounded-full text-amber-500 font-black text-sm border border-zinc-800">
+                        <div class="absolute top-3 right-3 bg-neutral-950/80 backdrop-blur-md px-3 py-1 rounded-full text-amber-500 font-black text-sm border border-neutral-800">
                             R$ ${prod.price.toFixed(2).replace('.', ',')}
                         </div>
                     </div>
                     <div class="p-5 flex-1 flex flex-col justify-between gap-4">
                         <div>
-                            <h4 class="text-lg font-black text-zinc-100 mb-2 tracking-tight group-hover:text-amber-500 transition">${prod.name}</h4>
-                            <p class="text-sm text-zinc-400 leading-relaxed font-light">${prod.description}</p>
+                            <h4 class="text-lg font-black text-neutral-100 mb-2 tracking-tight group-hover:text-amber-500 transition">${prod.name}</h4>
+                            <p class="text-sm text-neutral-400 leading-relaxed font-light">${prod.description}</p>
                         </div>
-                        <button onclick="addToCart(${prod.id})" class="w-full bg-zinc-800 hover:bg-amber-500 hover:text-zinc-950 text-zinc-100 font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-200 cursor-pointer">
+                        <button onclick="addToCart(${prod.id})" class="w-full bg-neutral-800 hover:bg-amber-500 hover:text-neutral-950 text-neutral-100 font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-200">
                             <i class="fa-solid fa-plus text-xs"></i> Adicionar ao Carrinho
                         </button>
                     </div>
@@ -193,17 +191,12 @@
             updateCartUI();
         }
 
-        // Abre ou Fecha o Modal do Carrinho
         function toggleCart(open) {
             const sidebar = document.getElementById('cart-sidebar');
-            if (open) {
-                sidebar.classList.remove('hidden');
-            } else {
-                sidebar.classList.add('hidden');
-            }
+            if (open) sidebar.classList.remove('hidden');
+            else sidebar.classList.add('hidden');
         }
 
-        // Adiciona um item ou incrementa a quantidade
         function addToCart(id) {
             const existingItem = cart.find(item => item.id === id);
             if (existingItem) {
@@ -215,7 +208,6 @@
             updateCartUI();
         }
 
-        // Altera a quantidade de itens direto no carrinho (+ ou -)
         function changeQuantity(id, delta) {
             const item = cart.find(item => item.id === id);
             if (item) {
@@ -227,18 +219,13 @@
             updateCartUI();
         }
 
-        // Mostra ou esconde o campo de troco com base na seleção de pagamento
         function handlePaymentChange() {
             const method = document.getElementById('payment-method').value;
             const changeContainer = document.getElementById('change-container');
-            if (method === 'Dinheiro') {
-                changeContainer.classList.remove('hidden');
-            } else {
-                changeContainer.classList.add('hidden');
-            }
+            if (method === 'Dinheiro') changeContainer.classList.remove('hidden');
+            else changeContainer.classList.add('hidden');
         }
 
-        // Atualiza toda a Interface do Carrinho, Totais e Badges
         function updateCartUI() {
             const container = document.getElementById('cart-items-container');
             const totalElement = document.getElementById('cart-total');
@@ -247,7 +234,7 @@
             const mobileFooter = document.getElementById('mobile-footer');
 
             if (cart.length === 0) {
-                container.innerHTML = `<p class="text-center text-zinc-500 py-10">Seu carrinho está vazio.</p>`;
+                container.innerHTML = `<p class="text-center text-neutral-500 py-10">Seu carrinho está vazio.</p>`;
                 totalElement.innerText = "R$ 0,00";
                 mobileTotalElement.innerText = "R$ 0,00";
                 badge.innerText = "0";
@@ -266,15 +253,15 @@
                 totalItems += item.quantity;
 
                 return `
-                    <div class="bg-zinc-950 p-3 rounded-xl border border-zinc-800 flex justify-between items-center gap-3">
+                    <div class="bg-neutral-950 p-3 rounded-xl border border-neutral-800 flex justify-between items-center gap-3">
                         <div class="flex-1">
-                            <h5 class="text-sm font-bold text-zinc-100">${item.name}</h5>
+                            <h5 class="text-sm font-bold text-neutral-100">${item.name}</h5>
                             <span class="text-xs text-amber-500 font-bold">R$ ${item.price.toFixed(2).replace('.', ',')}</span>
                         </div>
-                        <div class="flex items-center gap-2 bg-zinc-900 px-2 py-1 rounded-lg border border-zinc-800">
-                            <button onclick="changeQuantity(${item.id}, -1)" class="text-zinc-400 hover:text-zinc-100 px-1 font-bold text-xs cursor-pointer">-</button>
-                            <span class="text-sm font-bold text-zinc-200 min-w-[16px] text-center">${item.quantity}</span>
-                            <button onclick="changeQuantity(${item.id}, 1)" class="text-zinc-400 hover:text-zinc-100 px-1 font-bold text-xs cursor-pointer">+</button>
+                        <div class="flex items-center gap-2 bg-neutral-900 px-2 py-1 rounded-lg border border-neutral-800">
+                            <button onclick="changeQuantity(${item.id}, -1)" class="text-neutral-400 hover:text-neutral-100 px-1 font-bold text-xs">-</button>
+                            <span class="text-sm font-bold text-neutral-200 min-w-[16px] text-center">${item.quantity}</span>
+                            <button onclick="changeQuantity(${item.id}, 1)" class="text-neutral-400 hover:text-neutral-100 px-1 font-bold text-xs">+</button>
                         </div>
                     </div>
                 `;
@@ -285,14 +272,12 @@
             mobileTotalElement.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
         }
 
-        // Constrói a mensagem e direciona para o WhatsApp da loja
         function sendOrder() {
             if (cart.length === 0) {
                 alert("Seu carrinho está vazio!");
                 return;
             }
 
-            // Captura e valida dados do formulário
             const name = document.getElementById('cust-name').value.trim();
             const phone = document.getElementById('cust-phone').value.trim();
             const street = document.getElementById('cust-street').value.trim();
@@ -307,7 +292,6 @@
                 return;
             }
 
-            // Monta a string do pedido formatada de forma limpa
             let msg = `*🍔 NOVO PEDIDO - BURGER & CIA*\n`;
             msg += `-------------------------------------------\n`;
             msg += `*👤 CLIENTE:* ${name}\n`;
@@ -335,12 +319,19 @@
             }
             msg += `-------------------------------------------`;
 
-            // Codifica o texto para URL válida e redireciona
             const encodedText = encodeURIComponent(msg);
             const targetUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodedText}`;
             
             window.open(targetUrl, '_blank');
         }
 
-        // Carrega o catálogo na tela assim que abrir o site
-  
+        // Garante a execução segura independente da velocidade de carregamento da página
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+    </html>
+    
